@@ -3,5 +3,6 @@
 .classpath
 /bin
 /.settings
-.gitignore
 /target
+/.idea
+*.iml

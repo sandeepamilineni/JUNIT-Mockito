@@ -1,6 +1,7 @@
 import com.giffgaff.main.ToDoApp;
 import com.giffgaff.utility.MiscUtility;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,21 @@ public class ToDoAppTest {
         assertEquals("CD DS", toDoApp.truncateAInFirst2Positions("CD DS"));
         assertEquals("-CD", toDoApp.truncateAInFirst2Positions("A-CD"));
         assertEquals("CD", toDoApp.truncateAInFirst2Positions("aacd"));
+    }
+
+    @Test
+    void getMaxNumber(){
+        assertEquals(1, toDoApp.getMaxNumber(0,1));
+    }
+
+    @BeforeEach
+    public void practiceBeforeEachOne(){
+        System.out.println("Before each");
+    }
+
+    @BeforeEach
+    public void practiceBeforeEachTwo(){
+        System.out.println("Before each two");
     }
 
     @Nested

@@ -13,4 +13,8 @@ public class MiscUtility {
         return first2Chars.replaceAll("A", "") + truncatedStr;
     }
 
+    public int getMaxNumber(int x, int y){
+        return Math.max(x,y);
+    }
+
 }
