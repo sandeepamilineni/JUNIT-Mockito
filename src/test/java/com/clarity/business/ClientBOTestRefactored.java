@@ -4,13 +4,14 @@ import com.giffgaff.junit.business.ClientBO;
 import com.giffgaff.junit.business.ClientBOImpl;
 import com.giffgaff.junit.business.exception.DifferentCurrenciesException;
 import com.giffgaff.junit.model.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class ClientBOTestRefactored {
 
@@ -33,7 +34,7 @@ public class ClientBOTestRefactored {
 		assertAmount(actual, expected);
 	}
 
-	@Test(expected = DifferentCurrenciesException.class)
+	@Test
 	public void testClientProductSum_DifferentCurrencies_ThrowsException()
 			throws DifferentCurrenciesException {
 
@@ -42,7 +43,7 @@ public class ClientBOTestRefactored {
 				new AmountImpl(new BigDecimal("6.0"), Currency.INDIAN_RUPEE) };
 
 		List<Product> products = createProductListWithAmounts(amounts);
-
+		//(expected = DifferentCurrenciesException.class)
 		@SuppressWarnings("unused")
 		Amount actual = clientBO.getClientProductsSum(products);
 
