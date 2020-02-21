@@ -6,8 +6,13 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
+
+@Tag("Todo") //Junit5toGroupTestsAndIncludeorExcludeFromMavenSurefirePluginUsingthisName
 public class ToDoAppTest {
 
     MiscUtility toDoApp;
@@ -90,17 +95,46 @@ public class ToDoAppTest {
 
         @Test
         public void assertEquality(){
-            System.out.println("assertEquality  ");
             String actual = "SA";
             Assertions.assertNotEquals("SA",actual,"Hello");
         }
 
-        @Test
-        public void assertCondition(){
-            System.out.println("assertCondition  ");
-            int i=1,j=2;
-            boolean condition = i==j;
-            assertTrue(condition);
-        }
+            /**
+             * JUNIT 5 supports Lambda.
+             * Lambda is evaluated only when the assertion is false
+             */
+            @Test
+            public void shouldFailBecauseTheNumbersAreNotEqual_lazyEvaluation() {
+                Assertions.assertTrue(
+                        2 == 3,
+                        () -> "Numbers " + 2 + " and " + 3 + " are not equal!");
+            }
+
+            /**
+             * Group related assertions in JUNIT 5
+             */
+            @Test
+            public void shouldAssertAllTheGroup() {
+                List<Integer> list = Arrays.asList(1, 2, 4);
+                assertAll("List is not incremental",
+                        () -> Assertions.assertEquals(list.get(0).intValue(), 1),
+                        () -> Assertions.assertEquals(list.get(1).intValue(), 2),
+                        () -> Assertions.assertEquals(list.get(2).intValue(), 3));
+            }
+
+            /**
+             * Conditional test. The assertion is done when the env is <code>NOT</code> web.
+             */
+
+            @Test
+            public void whenEnvironmentIsWeb_thenUrlsShouldStartWithHttp() {
+                String address = "https://www.geeksforgeeks.org/run-levels-linux/";
+                assumingThat(!"WEB".equals(System.getenv("ENV")),
+                        () -> {
+                            assertTrue(address.startsWith("http"));
+                        });
+
+
+            }
     }
 }
