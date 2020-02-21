@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,6 +25,18 @@ public class DBandPerformanceTest {
         System.out.println(count);
     }
 
+    @Test
+    public void testSort_Performance(){
+        int array[] = {12,23,4};
+         assertTimeout(Duration.ofMillis(100), () -> {for(int i=1;i<=1000000;i++)
+        {
+            array[0] = i;
+            Arrays.sort(array);
+        }});
+
+
+
+    }
 
 
 
